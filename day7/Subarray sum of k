@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> cum_sum_freq;
+        cum_sum_freq[0] = 1;
+        
+        int cum_sum = 0;  
+        int count = 0;    
+        for (int num : nums) {
+            cum_sum += num;  
+            if (cum_sum_freq.find(cum_sum - k) != cum_sum_freq.end()) {
+                count += cum_sum_freq[cum_sum - k];  
+            }
+            cum_sum_freq[cum_sum]++;
+        }
+        return count; 
+    }
+};
